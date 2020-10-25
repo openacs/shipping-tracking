@@ -63,7 +63,7 @@ create index ecst_shipto_trans_id_key on ecst_shipto (trans_id);
    -- (using the shipping_address associated with the order)
 
    create function ecst_shipment_address_update_tr ()
-   returns opaque as '
+   returns trigger as '
    declare
            v_address_id            qal_ec_addresses.address_id%TYPE;
    begin
@@ -96,7 +96,7 @@ create index ecst_shipto_trans_id_key on ecst_shipto (trans_id);
    );
    
    create function ecst_shipments_audit_tr ()
-   returns opaque as '
+   returns trigger as '
    begin
            insert into ecst_shipments_audit (
            shipment_id, order_id, address_id,
